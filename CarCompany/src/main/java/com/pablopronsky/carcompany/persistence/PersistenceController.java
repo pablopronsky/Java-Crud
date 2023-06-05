@@ -5,6 +5,8 @@ import com.pablopronsky.carcompany.logic.Car;
 import com.pablopronsky.carcompany.persistence.exceptions.NonexistentEntityException;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class PersistenceController {
@@ -27,6 +29,18 @@ public class PersistenceController {
       carJpaController.destroy(selectedCarID);
       } catch (NonexistentEntityException e) {
       throw new RuntimeException(e);
+      }
+    }
+    // get selected car to edit in the gui
+    public Car getCar(int selectedCarID) {
+        return carJpaController.findCar(selectedCarID);
+    }
+    //edit 
+    public void editCar(Car car) {
+      try {
+          carJpaController.edit(car);
+      } catch (Exception ex) {
+          Logger.getLogger(PersistenceController.class.getName()).log(Level.SEVERE, null, ex);
       }
     }
 }

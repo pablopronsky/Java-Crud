@@ -42,4 +42,21 @@ public class Controller {
         jDialog.setAlwaysOnTop(true);
         jDialog.setVisible(true);
     }
+
+    public Car getCar(int selectedCarID) {
+        return persistenceController.getCar(selectedCarID);
+    }
+
+    public void editCar(Car car, String model, String make, String engine, String color, String licencePlate, 
+            int amountOfDoors) {
+       car.setModel(model);
+       car.setMake(make);
+       car.setEngine(engine);
+       car.setColor(color);
+       car.setLicencePlate(licencePlate);
+       car.setAmountOfDoors(amountOfDoors);
+       
+       persistenceController.editCar(car);
+    }
+
 }

@@ -238,12 +238,18 @@ public class NewCar extends javax.swing.JFrame {
      String licencePlate = txtLicencePlate.getText();
      int amountOfDoors = Integer.parseInt(txtDoors.getText());
      
+     // clean the fields so it looks cleaner
      controller.printMessage("Success", "Info", "Done");
      controller.addCar(model, make, engine, color, licencePlate, amountOfDoors);
-        
+     txtModel.setText("");
+     txtMake.setText("");
+     txtEngine.setText("");
+     txtColor.setText("");
+     txtLicencePlate.setText("");
+     txtDoors.setText("");   
    
     }//GEN-LAST:event_btnAddActionPerformed
-
+    
     private void btnCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCleanActionPerformed
         txtModel.setText("");
         txtMake.setText("");

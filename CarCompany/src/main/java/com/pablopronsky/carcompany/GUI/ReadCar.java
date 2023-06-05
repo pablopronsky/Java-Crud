@@ -24,7 +24,7 @@ public class ReadCar extends javax.swing.JFrame {
         Default = new javax.swing.JScrollPane();
         carsTable = new javax.swing.JTable();
         btnRemove = new javax.swing.JButton();
-        btnModify = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
         btnReload = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -68,10 +68,15 @@ public class ReadCar extends javax.swing.JFrame {
             }
         });
 
-        btnModify.setBackground(new java.awt.Color(76, 138, 200));
-        btnModify.setFont(new java.awt.Font("DejaVu Sans", 1, 15)); // NOI18N
-        btnModify.setForeground(new java.awt.Color(235, 235, 235));
-        btnModify.setText("MODIFY");
+        btnEdit.setBackground(new java.awt.Color(76, 138, 200));
+        btnEdit.setFont(new java.awt.Font("DejaVu Sans", 1, 15)); // NOI18N
+        btnEdit.setForeground(new java.awt.Color(235, 235, 235));
+        btnEdit.setText("EDIT");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         btnReload.setBackground(new java.awt.Color(76, 138, 200));
         btnReload.setFont(new java.awt.Font("DejaVu Sans", 1, 15)); // NOI18N
@@ -93,7 +98,7 @@ public class ReadCar extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnRemove, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnModify, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnReload, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -105,7 +110,7 @@ public class ReadCar extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(91, 91, 91)
-                .addComponent(btnModify, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(103, 103, 103)
                 .addComponent(btnRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(103, 103, 103)
@@ -181,10 +186,33 @@ public class ReadCar extends javax.swing.JFrame {
         loadTable();
     }//GEN-LAST:event_btnReloadActionPerformed
 
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // check table isn't empty
+      if (carsTable.getRowCount() > 0){
+          // check for an element selection in the table
+          if (carsTable.getSelectedRow() != 1){
+              // getting the ID from  the selected car
+              int selectedCarID = Integer.parseInt(String.valueOf(carsTable.getValueAt(carsTable.getSelectedRow(), 0)));
+              EditCar editCar = new EditCar(selectedCarID);
+              editCar.setVisible(true);
+              editCar.setLocationRelativeTo(null);
+              this.dispose();
+              
+          }
+          else {
+              controller.printMessage("Select a car to edit from the list", "Error", "You haven't selected a car");
+          }
+      }
+      else {
+          controller.printMessage("Table is empty", "Error", "Error");
+      }
+      
+    }//GEN-LAST:event_btnEditActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane Default;
-    private javax.swing.JButton btnModify;
+    private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnReload;
     private javax.swing.JButton btnRemove;
     private javax.swing.JTable carsTable;
